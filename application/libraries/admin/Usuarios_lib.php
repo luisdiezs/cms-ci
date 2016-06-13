@@ -9,11 +9,33 @@ class Usuarios_lib
         $this->ci->load->model('admin/usuarios_mod', 'musuarios');
     }
 
-    public function get_usuarios($uid = 0)
+    // obtiene los datos de todos los usuarios, si se envía el UID se obtendrá solo los datos de ese usuario
+    public function get_user($uid = 0)
     {
         if(empty($uid))
             return $this->ci->musuarios->get_all_users();
 
         return $this->ci->musuarios->get_user($uid);
+    }
+
+    public function save_user()
+    {
+        print_r($_POST);
+        if(!empty($_POST))
+        {
+            $this->ci->load->library('encrypt');
+            $new_user = array(
+                'nombres' => $this->input->post('nombres', true),
+                'apellidos' => $this->input->post('apellidos', true),
+                'correo' => $this->input->post('correo', true),
+                'cargo' => $this->input->post('cargo', true),
+                'perfil' => $this->input->post('perfil', true),
+                'usuario' => $this->input->post('usuario', true),
+                'clave' => $this->ci->encrypt->encode($this->input->post('clave', true)),
+                'estado' => $this->input->post('estado', true),
+            );
+
+            $this->db->insert('usuarios', $new_user);
+        }
     }
 }

@@ -9,9 +9,10 @@ class Usuarios_mod extends CI_Model
         $this->load->database();
     }
 
+    // obtiene los datos de todos los usuarios de la tabla
     public function get_all_users()
     {
-        $query = $this->db->query('SELECT uid, usuario, nombres, apellidos, perfil, estado, fecha_registro FROM usuarios');
+        $query = $this->db->query('SELECT uid, usuario, perfil, nombres, apellidos, correo, cargo, estado, fecha_registro FROM usuarios');
         
         $usuarios = array();
         if(!empty($query->result()))
@@ -24,9 +25,10 @@ class Usuarios_mod extends CI_Model
         return $usuarios;
     }
 
+    // obtiene los datos de un usuario específico a traves de su ID
     public function get_user($uid)
     {
-        $query = $this->db->query("SELECT uid, usuario, nombres, apellidos, perfil, estado, fecha_registro FROM usuarios WHERE uid = {$uid}");
+        $query = $this->db->query("SELECT uid, usuario, perfil, nombres, apellidos, correo, cargo, estado, fecha_registro FROM usuarios WHERE uid = {$uid}");
         
         $usuarios = array();
         if(!empty($query->result()))
