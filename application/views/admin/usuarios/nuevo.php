@@ -74,10 +74,10 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Perfil</label>
                                     <div class="col-sm-5">
-                                        <select class="form-control m-bot15">
-                                            <option>Option 1</option>
-                                            <option>Option 2</option>
-                                            <option>Option 3</option>
+                                        <select class="form-control m-bot15" name="perfil">
+                                            <option value="1">Option 1</option>
+                                            <option value="2">Option 2</option>
+                                            <option value="3">Option 3</option>
                                         </select>
                                     </div>
                                 </div>

@@ -23,19 +23,19 @@ class Usuarios_lib
         print_r($_POST);
         if(!empty($_POST))
         {
-            $this->ci->load->library('encrypt');
+            $this->ci->load->library('encryption');
             $new_user = array(
-                'nombres' => $this->input->post('nombres', true),
-                'apellidos' => $this->input->post('apellidos', true),
-                'correo' => $this->input->post('correo', true),
-                'cargo' => $this->input->post('cargo', true),
-                'perfil' => $this->input->post('perfil', true),
-                'usuario' => $this->input->post('usuario', true),
-                'clave' => $this->ci->encrypt->encode($this->input->post('clave', true)),
-                'estado' => $this->input->post('estado', true),
+                'nombres' => $this->ci->input->post('nombres', true),
+                'apellidos' => $this->ci->input->post('apellidos', true),
+                'correo' => $this->ci->input->post('correo', true),
+                'cargo' => $this->ci->input->post('cargo', true),
+                'perfil' => $this->ci->input->post('perfil', true),
+                'usuario' => $this->ci->input->post('usuario', true),
+                'clave' => $this->ci->encryption->encrypt($this->ci->input->post('clave', true)),
+                'estado' => $this->ci->input->post('estado', true),
             );
 
-            $this->db->insert('usuarios', $new_user);
+            $this->ci->db->insert('usuarios', $new_user);
         }
     }
 }
