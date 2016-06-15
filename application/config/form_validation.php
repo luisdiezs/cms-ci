@@ -48,4 +48,17 @@ $config = array(
             'rules' => '',
         ),
     ),
+    
+    'login' => array(
+        array(
+            'field' => 'usuario',
+            'label' => '',
+            'rules' => 'required',
+        ),
+        array(
+            'field' => 'clave',
+            'label' => '',
+            'rules' => 'required',
+        ),
+    ),
 );

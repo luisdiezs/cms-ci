@@ -20,7 +20,6 @@ class Usuarios_lib
 
     public function save_user()
     {
-        print_r($_POST);
         if(!empty($_POST))
         {
             $this->ci->load->library('encryption');
@@ -34,8 +33,31 @@ class Usuarios_lib
                 'clave' => $this->ci->encryption->encrypt($this->ci->input->post('clave', true)),
                 'estado' => $this->ci->input->post('estado', true),
             );
-
-            $this->ci->db->insert('usuarios', $new_user);
+            $this->ci->musuarios->save_user($new_user);
         }
+        return false;
+    }
+
+    public function login()
+    {
+        if(!empty($_POST))
+        {
+            $this->ci->load->library('encryption');
+            
+            $user_login = $this->ci->input->post('usuario', true);
+            $pass_login = $this->ci->input->post('clave', true);
+
+            $usuario = $this->ci->musuarios->login($user_login);
+
+            if($pass_login === $this->ci->encryption->decrypt($usuario[$user_login]->clave))
+            {
+                session_start();
+                $_SESSION = (array)$usuario[$user_login];
+                return true;
+            }
+
+            return false;
+        }
+        return false;
     }
 }

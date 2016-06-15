@@ -20,6 +20,9 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->load->helper('general');
+		validate_login();
+
 		$data['_page'] = 'page/form';
 		$this->load->view('dashboard', $data);
 	}

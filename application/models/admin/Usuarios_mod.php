@@ -41,4 +41,24 @@ class Usuarios_mod extends CI_Model
         return $usuarios;
     }
 
+    public function save_user($new_user)
+    {
+        $this->db->insert('usuarios', $new_user);
+    }
+
+    public function login($user)
+    {
+        $query = $this->db->query("SELECT uid, usuario, clave FROM usuarios WHERE usuario = '{$user}' LIMIT 1");
+
+        $usuario = array();
+        if(!empty($query->result()))
+        {
+            foreach ($query->result() as $row)
+            {
+                $usuario[$row->usuario] = $row;
+            }
+        }
+        return $usuario;
+    }
+
 }
